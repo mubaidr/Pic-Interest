@@ -1,0 +1,7 @@
+.navbar-brand {
+  color: #18bc9c!important;
+}
+
+.container.body {
+  min-height: calc(100vh - 252px);
+}
