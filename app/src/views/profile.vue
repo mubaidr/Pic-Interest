@@ -18,24 +18,6 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="col-lg-2 control-label">Contact Number</label>
-          <div class="col-lg-10">
-            <input type="text" class="form-control" placeholder="Contact Number" :disabled="loading" v-model="user.contact_number">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-lg-2 control-label">State</label>
-          <div class="col-lg-10">
-            <input type="text" class="form-control" placeholder="State" :disabled="loading" v-model="user.state">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-lg-2 control-label">City</label>
-          <div class="col-lg-10">
-            <input type="text" class="form-control" placeholder="City" :disabled="loading" v-model="user.city">
-          </div>
-        </div>
-        <div class="form-group">
           <div class="col-lg-10 col-lg-offset-2">
             <router-link to="/home" class="btn btn-default">Cancel</router-link>
             <button type="submit" class="btn btn-primary" @click="updateProfile" :disabled="loading">Update</button>
@@ -62,10 +44,7 @@
         loading: true,
         user: {
           first_name: '',
-          last_name: '',
-          contact_number: '',
-          state: '',
-          city: ''
+          last_name: ''
         }
       }
     },
