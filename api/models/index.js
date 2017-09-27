@@ -25,10 +25,10 @@ let mediaSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  votes: {
-    type: Number,
-    required: true
-  },
+  votes: [{
+    type: mongoose.Schema.Types.ObjectId,
+    model: 'Vote'
+  }],
   uploader: {
     type: mongoose.Schema.Types.ObjectId,
     model: 'User'
@@ -41,7 +41,7 @@ let voteSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     model: 'Media'
   },
-  voter: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     model: 'User'
   }

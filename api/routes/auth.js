@@ -7,8 +7,9 @@ const User = require('../models').Users
 const config = require('../config')
 
 router.post('/auth/register/', (req, res, next) => {
-  let username = req.body.username.toLowerCase()
+  let username = req.body.username
   let password = req.body.password
+
   let passwordHash = bcrypt.hashSync(password, 8)
 
   if (!validate.username(username) || !validate.password(password)) {
@@ -18,6 +19,8 @@ router.post('/auth/register/', (req, res, next) => {
     })
     return
   }
+
+  username = username.toLowerCase()
 
   User.findOne({
     username: username
@@ -127,7 +130,11 @@ router.use('/api/*', (req, res, next) => {
       next()
     })
   } else {
-    res.sendStatus(403)
+    if (req.originalUrl === '/api/media/') {
+      next()
+    } else {
+      res.sendStatus(403)
+    }
   }
 })
 

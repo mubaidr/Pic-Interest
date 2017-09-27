@@ -2,10 +2,14 @@ const router = require('express').Router()
 
 const authRoutes = require('./auth')
 const userRoutes = require('./users')
+const mediaRoutes = require('./media')
+const voteroutes = require('./votes')
 
 /* Register model routes */
 router.use(authRoutes)
 router.use(userRoutes)
+router.use(mediaRoutes)
+router.use(voteroutes)
 
 /* 404 */
 router.get('*', (req, res) => {
