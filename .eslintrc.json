@@ -11,18 +11,20 @@
         },
         "sourceType": "module"
     },
+    "plugins": ["node"],
     "extends": [
         "eslint:recommended",
         "plugin:node/recommended"
     ],
     "rules": {
+        "constructor-super": "warn",
+        "no-console": "warn",
         "no-const-assign": "warn",
         "no-this-before-super": "warn",
         "no-undef": "warn",
         "no-unreachable": "warn",
         "no-unused-vars": "warn",
-        "constructor-super": "warn",
-        "valid-typeof": "warn",
-        "no-console": "warn"
+        "node/exports-style": ["error", "module.exports"],
+        "valid-typeof": "warn"
     }
 }
