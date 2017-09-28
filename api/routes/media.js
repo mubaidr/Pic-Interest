@@ -4,7 +4,7 @@ const Media = require('./../models').Media
 router.get('/api/media/', (req, res, next) => {
   Media.find().sort({
     upload_date: -1
-  }).exec((err, media) => {
+  }).populate(['uploader', 'votes']).exec((err, media) => {
     if (err) next(err)
 
     res.json(media)

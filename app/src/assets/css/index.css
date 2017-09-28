@@ -5,3 +5,73 @@
 .container.body {
   min-height: calc(100vh - 252px);
 }
+
+/*custom radio inputs*/
+
+.radio-type {
+  width: 48%;
+  padding: 15px;
+  background-color: #ecf0f1;
+  display: inline-block;
+  text-align: center;
+  margin-right: 1%;
+  cursor: pointer;
+  transition: all 0.25s ease-out;
+}
+
+.radio-type:hover {
+  color: #fff;
+  background-color: #18bc9c;
+}
+
+.radio-type.selected {
+  color: #fff;
+  background-color: #18bc9c;
+}
+
+/*Media elements*/
+
+.media-elem {
+  /* border: 1px solid #18bc9c; */
+  background-color: #2c3e50;
+  border-radius: 3px;
+  color: #fff;
+  transition: transform 0.25s ease-out;
+}
+
+.media-elem .title {
+  display: block;
+  text-align: center;
+  padding: 10px;
+  text-overflow: ellipsis;
+  font-weight: bold;
+}
+
+.media-elem img,
+.media-elem video {
+  min-width: 120px;
+  min-height: 120px;
+  max-width: 320px;
+  width: 100%;
+  height: auto;
+}
+
+.media-elem .toolbar {
+  clear: both;
+}
+
+.media-elem .toolbar .uploader {
+  float: left;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.media-elem .toolbar .votes {
+  float: right;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.grid-item {
+  margin-bottom: 10px;
+}

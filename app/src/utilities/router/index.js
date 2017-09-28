@@ -7,6 +7,8 @@ import home from './../../views/home.vue'
 import register from './../../views/register.vue'
 import profile from './../../views/profile.vue'
 import login from './../../views/login.vue'
+import addMedia from './../../views/addMedia.vue'
+import media from './../../views/media.vue'
 
 Vue.use(Router)
 
@@ -18,6 +20,12 @@ const router = new Router({
   }, {
     path: '/home',
     component: home
+  }, {
+    path: '/add',
+    component: addMedia
+  }, {
+    path: '/media',
+    component: media
   }, {
     path: '/profile',
     component: profile,

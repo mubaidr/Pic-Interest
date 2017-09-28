@@ -4,7 +4,13 @@
       <div class="navbar-header">
         <router-link to="/home" class="navbar-brand">Pic-interest</router-link>
       </div>
-      <ul class="nav navbar-nav"></ul>
+      <ul class="nav navbar-nav">
+        <template v-if="isAuthenticated">
+          <li>
+            <router-link to="/add">Add Media</router-link>
+          </li>
+        </template>
+      </ul>
       <ul class="nav navbar-nav pull-right">
         <template v-if="isAuthenticated">
           <li>

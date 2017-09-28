@@ -21,17 +21,25 @@ let userSchema = new mongoose.Schema({
 })
 
 let mediaSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true
+  },
+  type: {
+    type: String,
+    required: true
+  },
   link: {
     type: String,
     required: true
   },
   votes: [{
     type: mongoose.Schema.Types.ObjectId,
-    model: 'Vote'
+    ref: 'Vote'
   }],
   uploader: {
     type: mongoose.Schema.Types.ObjectId,
-    model: 'User'
+    ref: 'User'
   },
   upload_date: Date
 })
@@ -39,16 +47,16 @@ let mediaSchema = new mongoose.Schema({
 let voteSchema = new mongoose.Schema({
   media: {
     type: mongoose.Schema.Types.ObjectId,
-    model: 'Media'
+    ref: 'Media'
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    model: 'User'
+    ref: 'User'
   }
 })
 
 let userModel = mongoose.model('User', userSchema)
-let mediaModel = mongoose.model('Meida', mediaSchema)
+let mediaModel = mongoose.model('Media', mediaSchema)
 let voteModel = mongoose.model('Vote', voteSchema)
 
 // voteSchema.pre('save', next => {
