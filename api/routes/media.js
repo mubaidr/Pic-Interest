@@ -4,7 +4,7 @@ const Media = require('./../models').Media
 router.get('/api/media/', (req, res, next) => {
   Media.find().sort({
     upload_date: -1
-  }).populate(['uploader', 'votes']).exec((err, media) => {
+  }).populate('uploader').populate('votes').exec((err, media) => {
     if (err) next(err)
 
     res.json(media)
@@ -14,7 +14,7 @@ router.get('/api/media/', (req, res, next) => {
 router.get('/api/media/:id/', (req, res, next) => {
   let id = req.params.id
 
-  Media.findById(id).populate(['uploader', 'votes']).exec((err, media) => {
+  Media.findById(id).populate('uploader').populate('votes').exec((err, media) => {
     if (err) next(err)
 
     res.json(media)
