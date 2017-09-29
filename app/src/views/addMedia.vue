@@ -12,7 +12,7 @@
         <div class="form-group">
           <label class="col-lg-2 control-label">Type</label>
           <div class="col-lg-10">
-            <div class="radio-type" :class="{'selected': media.type === t}" v-for="(t, index) in types" :key="t" @click="setType(t)">
+            <div class="radio-type" :class="{'selected': media.type === t}" v-for="(t, i) in types" :key="i" @click="setType(i)">
               {{t}}
             </div>
           </div>
@@ -21,11 +21,11 @@
           <label class="col-lg-2 control-label">Link</label>
           <div class="col-lg-10">
             <input type="text" class="form-control" placeholder="Link to the media" v-model="media.link"><br/>
-            <div class="well preview">
-              <div class="progress progress-striped active">
-                <div class="progress-bar" style="width: 100%"></div>
-              </div>
-              Look, I'm in a well!
+            <div class="well preview" v-show="enablePreview">
+              <img :src="media.link" v-if="media.type=='Image'" />
+              <video controls preload v-else>
+                <source :src="media.link" type="video/mp4"> Your browser does not support the video tag.
+              </video>
             </div>
           </div>
         </div>
@@ -55,21 +55,24 @@
     data () {
       return {
         media: {
-          type: 'Image',
           title: '',
-          link: ''
+          link: '',
+          type: 'Image'
         },
         types: ['Image', 'Video'],
-        verify: 0,
         loading: false
       }
     },
+    watch: {},
     computed: {
-      ...mapGetters(['getAPI'])
+      ...mapGetters(['getAPI']),
+      enablePreview () {
+        return this.media.link.length > 10
+      }
     },
     methods: {
-      setType (t) {
-        this.media.type = t
+      setType (i) {
+        this.media.type = this.types[i]
       },
       addMedia () {
         this.loading = true

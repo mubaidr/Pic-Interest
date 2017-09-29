@@ -42,6 +42,7 @@ router.delete('/api/media/:id/', (req, res, next) => {
     uploader: uploaderId
   }).exec((err, deletedMedia) => {
     if (err) next(err)
+
     if (deletedMedia) {
       res.json(deletedMedia)
     } else {

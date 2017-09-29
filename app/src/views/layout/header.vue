@@ -5,6 +5,9 @@
         <router-link to="/home" class="navbar-brand">Pic-interest</router-link>
       </div>
       <ul class="nav navbar-nav">
+        <li>
+          <router-link to="/home">Latest Media</router-link>
+        </li>
         <template v-if="isAuthenticated">
           <li>
             <router-link to="/add">Add Media</router-link>

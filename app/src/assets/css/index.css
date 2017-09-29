@@ -9,14 +9,19 @@
 /*custom radio inputs*/
 
 .radio-type {
-  width: 48%;
+  width: 49%;
   padding: 15px;
   background-color: #ecf0f1;
   display: inline-block;
   text-align: center;
-  margin-right: 1%;
+  margin-right: 2%;
   cursor: pointer;
   transition: all 0.25s ease-out;
+  user-select: none;
+}
+
+.radio-type:last-of-type {
+  margin-right: 0;
 }
 
 .radio-type:hover {
@@ -37,6 +42,8 @@
   border-radius: 3px;
   color: #fff;
   transition: transform 0.25s ease-out;
+  max-width: 320px;
+  min-height: 240px;
 }
 
 .media-elem .title {
@@ -49,9 +56,6 @@
 
 .media-elem img,
 .media-elem video {
-  min-width: 120px;
-  min-height: 120px;
-  max-width: 320px;
   width: 100%;
   height: auto;
 }
@@ -73,4 +77,14 @@
 
 .grid-item {
   margin-bottom: 10px;
+}
+
+.preview {
+  text-align: center;
+}
+
+.preview img,
+.preview video {
+  width: 100%;
+  height: auto;
 }

@@ -6,14 +6,13 @@
       </div>
     </template>
     <template v-else-if="media.length > 0">
-      <div ref="grid" class="grid">
+      <div ref="grid" class="grid" v-images-loaded:on.progress="imageProgress">
         <div class="grid-item" v-for="m in media" :key="m._id">
           <div class="media-elem">
             <span class="title" :title="m.upload_date">{{m.title}}</span>
-            <img :alt="m.title" :src="m.link" v-if="m.type='Image'" />
-            <video controls v-else>
-              <source src="movie.mp4" type="video/mp4">
-              <source src="movie.ogg" type="video/ogg"> Your browser does not support the video tag.
+            <img :alt="m.title" :src="m.link" v-if="m.type=='Image'" />
+            <video controls preload v-else>
+              <source :src="m.link" type="video/mp4">Your browser does not support the video tag.
             </video>
             <div class="toolbar">
               <span class="uploader" title="uploader">@{{m.uploader.username}}</span>
@@ -33,12 +32,12 @@
         <strong>Oops!</strong> No media found!
       </div>
     </div>
-    <pre>{{media}}</pre>
   </div>
 </template>
 
 <script>
   /* global Masonry */
+  import imagesLoaded from 'vue-images-loaded'
   import { mapGetters } from 'vuex'
   import axios from 'axios'
 
@@ -49,13 +48,16 @@
         loading: true
       }
     },
+    directives: {
+      imagesLoaded
+    },
     computed: {
       ...mapGetters(['getAPI', 'getUser'])
     },
     mounted () {
       axios.get(this.getAPI.url + '/api/media/').then(res => {
         this.media = res.data
-        //this.initializeMasonry()
+        this.initializeMasonry()
       }).catch(err => {
         alert(err)
       }).then(() => {
@@ -63,6 +65,9 @@
       })
     },
     methods: {
+      imageProgress () {
+        this.mediaLayout.layout()
+      },
       hasVoted (votes) {
         votes = votes.filter((item) => {
           return item.user === this.getUser._id
@@ -89,7 +94,7 @@
       initializeMasonry () {
         setTimeout(() => {
           this.$nextTick(() => {
-            new Masonry(this.$refs.grid, {
+            this.mediaLayout = new Masonry(this.$refs.grid, {
               itemSelector: '.grid-item',
               columnWidth: 1,
               gutter: 10
