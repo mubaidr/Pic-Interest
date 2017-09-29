@@ -1,4 +1,3 @@
-import Masonry from 'masonry-layout'
 import './utilities/pollyfills'
 import './utilities/axios'
 import './assets/js/site.js'

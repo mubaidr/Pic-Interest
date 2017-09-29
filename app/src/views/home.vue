@@ -37,6 +37,7 @@
 
 <script>
   /* global Masonry */
+  import Masonry from 'masonry-layout'
   import imagesLoaded from 'vue-images-loaded'
   import { mapGetters } from 'vuex'
   import axios from 'axios'
@@ -52,7 +53,7 @@
       imagesLoaded
     },
     computed: {
-      ...mapGetters(['getAPI', 'getUser'])
+      ...mapGetters(['getAPI', 'isAuthenticated', 'getUser'])
     },
     mounted () {
       axios.get(this.getAPI.url + '/api/media/').then(res => {
@@ -69,11 +70,15 @@
         this.mediaLayout.layout()
       },
       hasVoted (votes) {
-        votes = votes.filter((item) => {
-          return item.user === this.getUser._id
-        })
+        if (this.isAuthenticated) {
+          votes = votes.filter((item) => {
+            return item.user === this.getUser._id
+          })
 
-        return votes.length > 0
+          return votes.length > 0
+        } else {
+          return false
+        }
       },
       toggleVote (media) {
         axios.post(this.getAPI.url + '/api/vote/', {

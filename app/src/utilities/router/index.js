@@ -22,7 +22,10 @@ const router = new Router({
     component: home
   }, {
     path: '/add',
-    component: addMedia
+    component: addMedia,
+    meta: {
+      requiresAuth: true
+    }
   }, {
     path: '/media',
     component: media
