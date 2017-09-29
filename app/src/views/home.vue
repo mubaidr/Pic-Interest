@@ -5,8 +5,8 @@
         <div class="progress-bar" style="width: 100%"></div>
       </div>
     </template>
-    <template v-else>
-      <div v-show="media.length > 0" ref="grid" class="grid">
+    <template v-else-if="media.length > 0">
+      <div ref="grid" class="grid">
         <div class="grid-item" v-for="m in media" :key="m._id">
           <div class="media-elem">
             <span class="title" :title="m.upload_date">{{m.title}}</span>
@@ -28,7 +28,7 @@
         </div>
       </div>
     </template>
-    <div v-show="media.length === 0">
+    <div v-else>
       <div class="alert alert-info">
         <strong>Oops!</strong> No media found!
       </div>
@@ -52,10 +52,10 @@
     computed: {
       ...mapGetters(['getAPI', 'getUser'])
     },
-    created () {
+    mounted () {
       axios.get(this.getAPI.url + '/api/media/').then(res => {
         this.media = res.data
-        this.initializeMasonry()
+        //this.initializeMasonry()
       }).catch(err => {
         alert(err)
       }).then(() => {
@@ -64,9 +64,11 @@
     },
     methods: {
       hasVoted (votes) {
-        return votes ? votes.filter((item) => {
-          item.user._id === this.getUser._id
-        }).length > 0 : false
+        votes = votes.filter((item) => {
+          return item.user === this.getUser._id
+        })
+
+        return votes.length > 0
       },
       toggleVote (media) {
         axios.post(this.getAPI.url + '/api/vote/', {

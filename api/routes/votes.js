@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const Votes = require('./../models').Votes
+const Media = require('./../models').Media
 
 router.post('/api/vote/', (req, res, next) => {
   let mediaId = req.body.mediaId
@@ -17,16 +18,29 @@ router.post('/api/vote/', (req, res, next) => {
         vote: vote
       })
     } else {
-      new Votes({
-        media: mediaId,
-        user: userId
-      }).save((err, vote) => {
+      Media.findById(mediaId).populate('votes').exec((err, media) => {
         if (err) next(err)
 
-        res.json({
-          voted: true,
-          vote: vote
+        let vote = new Votes({
+          media: mediaId,
+          user: userId
         })
+
+        vote.save((err, vote) => {
+          if (err) next(err)
+
+          media.votes.push(vote)
+
+          media.save(err => {
+            if (err) next(err)
+
+            res.json({
+              voted: true,
+              vote: vote
+            })
+          })
+        })
+
       })
     }
   })
