@@ -1,5 +1,7 @@
 # pic-interest
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/mubaidr/Pic-Interest.svg)](https://greenkeeper.io/)
+
 pic-interest: like pinterest but simpler
 
 Built using Nodejs, Expressjs and mongoDB and masonry for layout
